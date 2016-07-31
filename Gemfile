@@ -30,9 +30,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'dotenv'
 end
 
 group :development do
