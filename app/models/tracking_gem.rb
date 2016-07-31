@@ -1,0 +1,2 @@
+class TrackingGem < ApplicationRecord
+end
