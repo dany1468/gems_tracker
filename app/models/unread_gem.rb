@@ -1,0 +1,2 @@
+class UnreadGem < ApplicationRecord
+end

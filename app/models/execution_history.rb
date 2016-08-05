@@ -1,0 +1,2 @@
+class ExecutionHistory < ApplicationRecord
+end
