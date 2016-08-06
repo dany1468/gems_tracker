@@ -8,7 +8,7 @@ class RubyGem
       @client = client
     end
 
-    def fetch_unread_gems
+    def import_unread_gems
       since_id = ExecutionHistory.last.latest_tweet_id
       ruby_gems_tweets = fetch_user_timeline(since_id)
 
