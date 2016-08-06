@@ -38,19 +38,10 @@ class RubyGem
       end
     end
 
-    def fetch_user_timeline(since_id, max_id = nil, timelines = [])
-      options = {count: 200, since_id: since_id}
-      options.merge!(max_id: max_id) if max_id
-
-      tls = client.user_timeline('rubygems', options)
-
-      timelines.concat(tls)
-
-      if tls.size < options[:count]
-        timelines
-      else
-        fetch_user_time_line(since_id, tls.last.id, timelines)
-      end
+    def fetch_user_timeline(since_id)
+      client.timeline_with_paging(since_id) {|opt|
+        client.user_timeline('rubygems', opt)
+      }
     end
   end
 end
