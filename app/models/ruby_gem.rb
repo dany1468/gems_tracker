@@ -34,7 +34,7 @@ class RubyGem
           )
         }
 
-        ExecutionHistory.create(laetst_tweet_id: ruby_gems_tweets.first.id, start_tweet_id: since_id)
+        ExecutionHistory.create(latest_tweet_id: ruby_gems_tweets.first.id, start_tweet_id: since_id)
       end
     end
 
