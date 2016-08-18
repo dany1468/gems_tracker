@@ -1,3 +1,10 @@
-%li
 - @unread_gems.each do |gem|
-  %ul= gem.description
+  .box
+    = gem.name
+    = gem.version
+    = gem.description
+    = link_to 'rubygems', gem.url
+    .content
+      = form_tag tracking_gems_url do
+        = hidden_field_tag :unread_gem_id, gem.id
+        = button_tag 'do track', class: 'button is-primary is-outlined'
