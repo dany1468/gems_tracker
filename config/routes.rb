@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   resources :tracking_gems
 
   resources :unread_gems
+
+  resources :ignoring_gems
 end

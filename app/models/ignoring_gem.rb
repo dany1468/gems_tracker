@@ -1,2 +1,2 @@
-class IgnoringGem < AppliationRecord
+class IgnoringGem < ApplicationRecord
 end
