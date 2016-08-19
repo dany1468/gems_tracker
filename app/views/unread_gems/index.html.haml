@@ -9,3 +9,7 @@
         = hidden_field_tag :unread_gem_id, gem.id
         = text_field_tag :source_url, nil, class: 'input', placeholder: 'ex) github url'
         = button_tag 'do track', class: 'button is-primary is-outlined'
+      = form_for IgnoringGem.new do |f|
+        = f.hidden_field :name, value: gem.name
+        = f.hidden_field :registered_version, value: gem.version
+        = f.button 'ignore', class: 'button is-dark'
