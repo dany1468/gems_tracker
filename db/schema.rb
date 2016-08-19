@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802145058) do
+ActiveRecord::Schema.define(version: 20160819135311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160802145058) do
     t.string "name",           null: false
     t.string "latest_version", null: false
     t.string "source_url"
+    t.index ["name"], name: "index_tracking_gems_on_name", unique: true, using: :btree
   end
 
   create_table "unread_gems", force: :cascade do |t|
