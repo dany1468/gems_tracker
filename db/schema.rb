@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819135311) do
+ActiveRecord::Schema.define(version: 20160819140538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,11 @@ ActiveRecord::Schema.define(version: 20160819135311) do
   create_table "execution_histories", force: :cascade do |t|
     t.bigserial "latest_tweet_id", null: false
     t.bigserial "start_tweet_id",  null: false
+  end
+
+  create_table "ignoring_gems", force: :cascade do |t|
+    t.string "name",               null: false
+    t.string "registered_version", null: false
   end
 
   create_table "tracking_gems", force: :cascade do |t|

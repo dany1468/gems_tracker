@@ -1,0 +1,2 @@
+class IgnoringGem < AppliationRecord
+end
