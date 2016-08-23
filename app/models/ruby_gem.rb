@@ -1,4 +1,20 @@
 class RubyGem
+  attr_reader :name, :version, :description, :url
+
+  def initialize(name, version, description, url)
+    @name = name
+    @version = version
+    @description = description
+    @url = url
+  end
+
+  def ==(other_object)
+    return false unless other_object
+    return false if @name.nil? || other_object.name.nil?
+
+    @name == other_object.name
+  end
+
   class << self
     def client
       @client
@@ -8,34 +24,18 @@ class RubyGem
       @client = client
     end
 
-    def import_unread_gems
-      since_id = ExecutionHistory.last.latest_tweet_id
+    def collect_gems(since_id)
       ruby_gems_tweets = fetch_user_timeline(since_id)
 
-      ActiveRecord::Base.transaction do
-        # TODO description 内の短縮 URL を展開する
-        ruby_gems_tweets.each_with_object({}) {|tweet, gem_infos|
-          if /\A(?<gem_name>.+) \((?<gem_version>.+)\): (?<gem_description>.+) https:\/\/t.co/ =~ tweet.full_text
-            gem_url = tweet.uris.find {|uri| uri.display_url.start_with?('rubygems.org') }.try(:expanded_url).try(:to_s)
-            unless gem_infos.key?(gem_name)
-              gem_infos[gem_name] = {
-                version: gem_version,
-                description: gem_description,
-                url: gem_url
-              }
-            end
-          end
-        }.map {|(gem_name, info)|
-          UnreadGem.create(
-            name: gem_name,
-            version: info[:version],
-            description: info[:description],
-            url: info[:url]
-          )
-        }
+      # TODO description 内の短縮 URL を展開する
+      ruby_gems_tweets.each_with_object({}) {|tweet, gems|
+        if /\A(?<gem_name>.+) \((?<gem_version>.+)\): (?<gem_description>.+) https:\/\/t.co/ =~ tweet.full_text
+          gem_url = tweet.uris.find {|uri| uri.display_url.start_with?('rubygems.org') }.try(:expanded_url).try(:to_s)
+          gem = RubyGem.new(gem_name, gem_version, gem_description, gem_url)
 
-        ExecutionHistory.create(latest_tweet_id: ruby_gems_tweets.first.id, start_tweet_id: since_id)
-      end
+          gems << gem unless gems.include?(gem)
+        end
+      }
     end
 
     def fetch_user_timeline(since_id)
