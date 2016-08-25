@@ -28,7 +28,7 @@ class RubyGem
       ruby_gems_tweets = fetch_user_timeline(since_id)
 
       # TODO description 内の短縮 URL を展開する
-      ruby_gems_tweets.each_with_object({}) {|tweet, gems|
+      ruby_gems = ruby_gems_tweets.each_with_object([]) {|tweet, gems|
         if /\A(?<gem_name>.+) \((?<gem_version>.+)\): (?<gem_description>.+) https:\/\/t.co/ =~ tweet.full_text
           gem_url = tweet.uris.find {|uri| uri.display_url.start_with?('rubygems.org') }.try(:expanded_url).try(:to_s)
           gem = RubyGem.new(gem_name, gem_version, gem_description, gem_url)
@@ -36,6 +36,8 @@ class RubyGem
           gems << gem unless gems.include?(gem)
         end
       }
+
+      yield ruby_gems, ruby_gems_tweets.first.id
     end
 
     def fetch_user_timeline(since_id)

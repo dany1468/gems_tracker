@@ -11,7 +11,7 @@ class UnreadGemsImporter
           )
         }
 
-        ExecutionHistory.create(latest_tweet_id: next_cursor, start_tweet_id: cursor)
+        ExecutionHistory.create(latest_tweet_id: next_cursor, start_tweet_id: current_cursor)
       end
     end
   end
