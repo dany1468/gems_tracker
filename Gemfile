@@ -40,6 +40,7 @@ group :development do
   gem 'pry-byebug', group: 'test'
   gem 'pry-rails', group: 'test'
   gem 'spring'
+  gem 'spring-commands-rspec', require: false
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'tapp-awesome_print', group: 'test'
 end
