@@ -3,6 +3,8 @@ class UnreadGemsImporter
     unread_gems = collect_unread_gems!
 
     unread_gems.reject! {|gem| gem.name.in?(ignoring_gem_names) }
+
+    unread_gems
   end
 
   private
@@ -33,6 +35,6 @@ class UnreadGemsImporter
   end
 
   def ignoring_gem_names
-    @ignoring_gem_names = IgnoringGem.all.pluck(:nam)
+    @ignoring_gem_names = IgnoringGem.all.pluck(:name)
   end
 end
