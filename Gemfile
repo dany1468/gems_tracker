@@ -34,15 +34,22 @@ gem 'hamlit'
 gem 'twitter'
 
 group :development do
+  gem 'awesome_print', group: 'test'
+  gem 'better_errors', group: 'test'
+  gem 'binding_of_caller', group: 'test'
   gem 'dotenv-rails', group: 'test'
-  gem 'web-console'
-  gem 'listen', '~> 3.0.5'
+  gem 'hirb', group: 'test'
+  gem 'hirb-unicode', group: 'test'
   gem 'pry-byebug', group: 'test'
+  gem 'pry-doc', group: 'test'
   gem 'pry-rails', group: 'test'
+  gem 'pry-stack_explorer', group: 'test'
+  gem 'rails-flog', require: 'flog'
   gem 'spring'
   gem 'spring-commands-rspec', require: false
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'tapp-awesome_print', group: 'test'
+  gem 'web-console'
 end
 
 group :test do
