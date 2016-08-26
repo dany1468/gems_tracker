@@ -33,20 +33,21 @@ gem 'bulma-rails'
 gem 'hamlit'
 gem 'twitter'
 
-group :development, :test do
-  gem 'dotenv-rails'
-  gem 'pry-byebug'
-  gem 'pry-rails'
-end
-
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'dotenv-rails', group: 'test'
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'pry-byebug', group: 'test'
+  gem 'pry-rails', group: 'test'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'tapp-awesome_print', group: 'test'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+group :test do
+  gem 'database_rewinder'
+  gem 'fuubar'
+  gem 'factory_girl_rails', group: 'development'
+  gem 'rspec-its'
+  gem 'rspec-rails'
+end
